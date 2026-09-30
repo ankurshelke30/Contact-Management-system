@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ContactVault – DSA Contact Manager</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <i class="fas fa-address-book"></i>
+      <span>ContactVault</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#contacts-section" class="nav-link">Contacts</a>
+      <a href="#dsa-section" class="nav-link">DSA Info</a>
+      <a href="#about-section" class="nav-link">About</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-primary" id="addContactBtn">
+        <i class="fas fa-plus"></i> Add Contact
+      </button>
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-code"></i> DSA Project</div>
+      <h1>Smart Contact<br /><span class="gradient-text">Management</span></h1>
+      <p>A powerful contact manager built with real Data Structures &amp; Algorithms — Hash Tables, BSTs, Linked Lists, Sorting &amp; more.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary btn-lg" id="heroAddBtn">
+          <i class="fas fa-user-plus"></i> Add Contact
+        </button>
+        <button class="btn btn-outline btn-lg" id="heroDSABtn">
+          <i class="fas fa-project-diagram"></i> Explore DSA
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span id="totalCount">0</span><label>Contacts</label></div>
+        <div class="stat"><span id="groupCount">0</span><label>Groups</label></div>
+        <div class="stat"><span id="favCount">0</span><label>Favorites</label></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card fc1">
+        <i class="fas fa-user-circle"></i>
+        <span>Alice Johnson</span>
+        <small>+1 234 567 8901</small>
+      </div>
+      <div class="floating-card fc2">
+        <i class="fas fa-search"></i>
+        <span>O(1) Search</span>
+        <small>Hash Table</small>
+      </div>
+      <div class="floating-card fc3">
+        <i class="fas fa-sort-alpha-down"></i>
+        <span>Quick Sort</span>
+        <small>O(n log n)</small>
+      </div>
+      <div class="hero-circle">
+        <i class="fas fa-address-book"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTS SECTION ========== -->
+  <section class="section" id="contacts-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>All Contacts</h2>
+        <p>Manage your contacts stored in a Hash Table + BST hybrid</p>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search by name, phone, email..." />
+          <span class="search-tag" id="searchTag" style="display:none"></span>
+        </div>
+        <div class="toolbar-right">
+          <select id="sortSelect" class="select-input">
+            <option value="name-asc">Name A→Z</option>
+            <option value="name-desc">Name Z→A</option>
+            <option value="phone-asc">Phone ↑</option>
+            <option value="recent">Recently Added</option>
+            <option value="favorites">Favorites First</option>
+          </select>
+          <select id="filterGroup" class="select-input">
+            <option value="all">All Groups</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridView" title="Grid View"><i class="fas fa-th"></i></button>
+            <button class="view-btn" id="listView" title="List View"><i class="fas fa-list"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alphabet Quick Nav -->
+      <div class="alpha-nav" id="alphaNav"></div>
+
+      <!-- Contact Grid -->
+      <div class="contacts-grid" id="contactsGrid">
+        <div class="empty-state" id="emptyState">
+          <i class="fas fa-user-slash"></i>
+          <h3>No contacts yet</h3>
+          <p>Add your first contact to get started!</p>
+          <button class="btn btn-primary" id="emptyAddBtn">
+            <i class="fas fa-plus"></i> Add Contact
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DSA INFO SECTION ========== -->
+  <section class="section section-alt" id="dsa-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Data Structures Used</h2>
+        <p>Under the hood — real DSA powering every operation</p>
+      </div>
+      <div class="dsa-grid">
+        <div class="dsa-card">
+          <div class="dsa-icon" style="background: linear-gradient(135deg,#6366f1,#8b5cf6)">
+            <i class="fas fa-table"></i>
+          </div>
+          <h3>Hash Table</h3>
+          <p>Contacts stored with phone as key. Average <strong>O(1)</strong> insertion, deletion &amp; lookup.</p>
+          <div class="complexity-row">
+            <span class="badge green">Search O(1)</span>
+            <span class="badge blue">Insert O(1)</span>
+            <span class="badge red">Delete O(1)</span>
+          </div>
+        </div>
+        <div class="dsa-card">
+          <div class="dsa-icon" style="background: linear-gradient(135deg,#f59e0b,#ef4444)">
+            <i class="fas fa-tree"></i>
+          </div>
+          <h3>Binary Search Tree</h3>
+          <p>Contacts indexed by name for <strong>O(log n)</strong> alphabetical search &amp; range queries.</p>
+          <div class="complexity-row">
+            <span class="badge green">Search O(log n)</span>
+            <span class="badge blue">Insert O(log n)</span>
+            <span class="badge red">Delete O(log n)</span>
+          </div>
+        </div>
+        <div class="dsa-card">
+          <div class="dsa-icon" style="background: linear-gradient(135deg,#10b981,#059669)">
+            <i class="fas fa-link"></i>
+          </div>
+          <h3>Linked List</h3>
+          <p>Recent contacts maintained in a <strong>doubly linked list</strong> for O(1) front/back access.</p>
+          <div class="complexity-row">
+            <span class="badge green">Head Access O(1)</span>
+            <span class="badge blue">Traversal O(n)</span>
+          </div>
+        </div>
+        <div class="dsa-card">
+          <div class="dsa-icon" style="background: linear-gradient(135deg,#3b82f6,#1d4ed8)">
+            <i class="fas fa-sort"></i>
+          </div>
+          <h3>Quick Sort</h3>
+          <p>Contacts sorted using Quick Sort — <strong>O(n log n)</strong> average — by name, phone, or group.</p>
+          <div class="complexity-row">
+            <span class="badge green">Avg O(n log n)</span>
+            <span class="badge red">Worst O(n²)</span>
+          </div>
+        </div>
+        <div class="dsa-card">
+          <div class="dsa-icon" style="background: linear-gradient(135deg,#ec4899,#db2777)">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Binary Search</h3>
+          <p>Sorted contact list supports <strong>Binary Search O(log n)</strong> for ultra-fast lookups.</p>
+          <div class="complexity-row">
+            <span class="badge green">Search O(log n)</span>
+          </div>
+        </div>
+        <div class="dsa-card">
+          <div class="dsa-icon" style="background: linear-gradient(135deg,#f97316,#ea580c)">
+            <i class="fas fa-layer-group"></i>
+          </div>
+          <h3>Stack</h3>
+          <p>Undo/Redo history implemented with a <strong>Stack</strong> — last-in-first-out semantics.</p>
+          <div class="complexity-row">
+            <span class="badge green">Push O(1)</span>
+            <span class="badge blue">Pop O(1)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="section" id="about-section">
+    <div class="container about-grid">
+      <div class="about-text">
+        <h2>About This Project</h2>
+        <p>
+          <strong>ContactVault</strong> is a fully client-side Contact Management System built as a
+          DSA (Data Structures &amp; Algorithms) academic project. Every CRUD operation is backed by
+          a real data structure implementation in vanilla JavaScript.
+        </p>
+        <ul class="feature-list">
+          <li><i class="fas fa-check-circle"></i> Hash Table for O(1) contact lookup</li>
+          <li><i class="fas fa-check-circle"></i> BST for sorted name traversal</li>
+          <li><i class="fas fa-check-circle"></i> Doubly Linked List for recent contacts</li>
+          <li><i class="fas fa-check-circle"></i> Quick Sort for dynamic sorting</li>
+          <li><i class="fas fa-check-circle"></i> Stack for undo/redo</li>
+          <li><i class="fas fa-check-circle"></i> Binary Search on sorted arrays</li>
+          <li><i class="fas fa-check-circle"></i> LocalStorage persistence</li>
+          <li><i class="fas fa-check-circle"></i> Dark / Light theme toggle</li>
+          <li><i class="fas fa-check-circle"></i> Export contacts as JSON / CSV</li>
+        </ul>
+      </div>
+      <div class="about-visual">
+        <div class="tech-stack">
+          <div class="tech-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+          <div class="tech-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+          <div class="tech-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+          <div class="tech-item"><i class="fas fa-database"></i><span>LocalStorage</span></div>
+          <div class="tech-item"><i class="fas fa-project-diagram"></i><span>DSA</span></div>
+          <div class="tech-item"><i class="fab fa-github"></i><span>GitHub</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <i class="fas fa-address-book"></i>
+        <strong>ContactVault</strong>
+      </div>
+      <p>DSA Project — Contact Management System &copy; 2024</p>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#dsa-section"><i class="fas fa-code"></i> DSA Info</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== ADD / EDIT MODAL ========== -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Contact</h3>
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="contactForm" class="modal-body" novalidate>
+        <div class="avatar-picker">
+          <div class="avatar-preview" id="avatarPreview">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="avatar-colors" id="avatarColors"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name <span class="req">*</span></label>
+            <input type="text" id="firstName" placeholder="John" required />
+            <span class="err" id="firstNameErr"></span>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="+1 234 567 8901" required />
+          <span class="err" id="phoneErr"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" />
+          <span class="err" id="emailErr"></span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Group</label>
+            <select id="group">
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+              <option value="Family">Family</option>
+              <option value="Friends">Friends</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" id="address" placeholder="City, Country" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea id="notes" rows="2" placeholder="Any additional notes..."></textarea>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="isFavorite" />
+          <label for="isFavorite"><i class="fas fa-star"></i> Mark as Favorite</label>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveBtn">
+            <i class="fas fa-save"></i> Save Contact
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== VIEW CONTACT MODAL ========== -->
+  <div class="modal-overlay" id="viewModal">
+    <div class="modal modal-view">
+      <div class="modal-header">
+        <h3>Contact Details</h3>
+        <button class="modal-close" id="viewModalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="viewModalBody"></div>
+    </div>
+  </div>
+
+  <!-- ========== DELETE CONFIRM ========== -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal modal-sm">
+      <div class="modal-header danger">
+        <h3><i class="fas fa-exclamation-triangle"></i> Delete Contact</h3>
+        <button class="modal-close" id="deleteModalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong id="deleteName"></strong>? This action cannot be undone.</p>
+        <div class="modal-footer">
+          <button class="btn btn-ghost" id="deleteCancelBtn">Cancel</button>
+          <button class="btn btn-danger" id="confirmDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TOAST ========== -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- ========== UNDO BAR ========== -->
+  <div class="undo-bar" id="undoBar" style="display:none">
+    <span id="undoMsg">Contact deleted.</span>
+    <button class="btn btn-sm" id="undoBtn"><i class="fas fa-undo"></i> Undo</button>
+  </div>
+
+  <!-- Export FAB -->
+  <div class="fab-group">
+    <button class="fab fab-main" id="fabMain" title="More actions">
+      <i class="fas fa-ellipsis-v"></i>
+    </button>
+    <div class="fab-options" id="fabOptions">
+      <button class="fab fab-sm" id="exportJson" title="Export JSON">
+        <i class="fas fa-file-code"></i>
+      </button>
+      <button class="fab fab-sm" id="exportCsv" title="Export CSV">
+        <i class="fas fa-file-csv"></i>
+      </button>
+      <button class="fab fab-sm" id="importBtn" title="Import JSON">
+        <i class="fas fa-file-import"></i>
+      </button>
+    </div>
+    <input type="file" id="importFile" accept=".json" style="display:none" />
+  </div>
+
+  <script src="js/dsa/HashTable.js"></script>
+  <script src="js/dsa/BST.js"></script>
+  <script src="js/dsa/LinkedList.js"></script>
+  <script src="js/dsa/Stack.js"></script>
+  <script src="js/dsa/QuickSort.js"></script>
+  <script src="js/dsa/BinarySearch.js"></script>
+  <script src="js/ContactStore.js"></script>
+  <script src="js/UI.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
